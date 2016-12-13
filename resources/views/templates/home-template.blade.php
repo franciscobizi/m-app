@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ url('/home') }}">G-MPLA</a>
+          <a class="navbar-brand" href="{{ route('user-profile') }}">G-MPLA</a>
         </div>
         <form class="navbar-form navbar-left" role="search" method="post" action="{{ route('search-m') }}">
             {!! csrf_field() !!}

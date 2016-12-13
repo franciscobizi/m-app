@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::get('reset', 'UserController@showReset');
 Route::post('reset', 'UserController@resetPass');
 Route::post('autorization', 'UserController@auth')->name('authentication');
-Route::get('home', 'UserController@profile');
+Route::get('home', 'UserController@profile')->name('user-profile');
 Route::get('logout', 'UserController@loGOut');
 /*
  *Business routes
