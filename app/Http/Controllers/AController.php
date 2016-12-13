@@ -8,30 +8,34 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use App\Models\CRUD_DB;
 
 class AController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
+    /*
+     * METHOD THAT LISTS USERS
+     */
     public function AUsers(Request $request)
     {
-        $users = [
-            'id'         => '1',
-            'name'       => 'Francisco Bizi',
-            'email'      => 'admin@admin.com',
-            'fone'       => '+244943738335',
-            'created_at' => date('d-m-Y')
-            
-        ];
+        $u = new CRUD_DB();
+        $field = $u->select_all('t_users');
         
-        $person = $request->session()->get('person');
-        $rule = $request->session()->get('rule');
-        return view('users',['usuarios'=>$users,'person'=>$person,'rule'=>$rule]);
+        return view('users',[
+            'usuario'=>$field,
+            'person'=>$request->session()->get('person'),
+            'rule'=>$request->session()->get('rule'),
+            'name'=>$request->session()->get('name'),
+            'pass'=>$request->session()->get('pass')
+            ]
+        );
     }
-    
+    /*
+     * METHOD THAT LISTS MILITANTES
+     */
     public function AClients(Request $request)
     {
-        $users = [
+        $militantes = [
             'id'         => '1',
             'name'       => 'Marcos Mbanza',
             'email'      => 'marcos@marcos.com',
@@ -40,14 +44,21 @@ class AController extends BaseController
             
         ];
         
-        $person = $request->session()->get('person');
-        $rule = $request->session()->get('rule');
-        return view('clients',['usuarios'=>$users,'person'=>$person,'rule'=>$rule]);
+        return view('clients',[
+            'usuarios'=>$militantes,
+            'person'=>$request->session()->get('person'),
+            'rule'=>$request->session()->get('rule'),
+            'name'=>$request->session()->get('name'),
+            'pass'=>$request->session()->get('pass')
+            ]
+        );
     }
-    
+    /*
+     * METHOD THAT SEARCH MILITANTE
+     */
     public function MSearch(Request $request)
     {
-        $users = [
+        $militantes = [
             'id'         => '1',
             'name'       => 'Marcos Mbanza',
             'email'      => 'marcos@marcos.com',
@@ -55,7 +66,7 @@ class AController extends BaseController
             'created_at' => date('d-m-Y')
             
         ];
-        $usersa = [
+        $nomilitantes = [
             'id'         => '',
             'name'       => '',
             'email'      => '',
@@ -64,21 +75,33 @@ class AController extends BaseController
             
         ];
         
-        $search = $request->msearch;
-        $person = $request->session()->get('person');
-        $rule = $request->session()->get('rule');
-        
-        if($search == 'marcos' || $search == '943738335' || $search == '7888')
+        if($request->msearch == 'marcos' || $request->msearch == '943738335' || $request->msearch == '7888')
         {
-           return view('clients',['usuarios'=>$users,'person'=>$person,'rule'=>$rule,'search'=>'']);  
+           return view('clients',[
+                'usuarios'=>$militantes,
+                'person'=>$request->session()->get('person'),
+                'rule'=>$request->session()->get('rule'),
+                'name'=>$request->session()->get('name'),
+                'pass'=>$request->session()->get('pass')
+                ]
+            );  
         }
         else
         {
-           return view('clients',['usuarios'=>$usersa,'person'=>$person,'rule'=>$rule,'search'=>'']); 
+           return view('clients',[
+                'usuarios'=>$nomilitantes,
+                'person'=>$request->session()->get('person'),
+                'rule'=>$request->session()->get('rule'),
+                'name'=>$request->session()->get('name'),
+                'pass'=>$request->session()->get('pass')
+                ]
+            ); 
         }
         
     }
-    
+    /*
+     * METHOD THAT LISTS EVENTS
+     */
     public function AEvents(Request $request)
     {
         $events = [
@@ -90,9 +113,14 @@ class AController extends BaseController
             
         ];
         
-        $person = $request->session()->get('person');
-        $rule = $request->session()->get('rule');
-        return view('events',['events'=>$events,'person'=>$person,'rule'=>$rule]);
+        return view('events',[
+            'events'=>$events,
+            'person'=>$request->session()->get('person'),
+            'rule'=>$request->session()->get('rule'),
+            'name'=>$request->session()->get('name'),
+            'pass'=>$request->session()->get('pass')
+            ]
+        );
     }
     
     

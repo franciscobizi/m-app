@@ -8,75 +8,126 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use App\Models\USer;
 
 class UserController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    /*
+     * /METHOD TO ALLOW RESET PAGE
+     */
     public function showReset()
     {
         return view('reset');
     }
-    
+    /*
+     * /METHOD TO LOGOUT FROM SYSTEM
+     */
     public function loGOut(Request $request)
     {
         $request->session()->forget('person');
         return redirect('/');
     }
+    /*
+     * /METHOD TO ALLOW USER PROFILE
+     */
     public function profile(Request $request)
     {
         $person = $request->session()->get('person');
         $rule = $request->session()->get('rule');
-        return view('home',['person'=>$person,'rule'=>$rule]);
+        $name = $request->session()->get('name');
+        $pass = $request->session()->get('pass');
+        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass]);
     }
-
+    /*
+     * /METHOD TO AUTHENTICATION
+     */
     public function auth(Request $request)
     {
         
-        $email = $request->mail;
-        $pass = $request->pass;
-        if($email == '' || $pass == '')
+        $users = new USer();
+        $user = $users->getEmail('t_users', $request->mail);
+        
+        if(empty($request->mail) || empty($request->pass))
         {
-            return view('welcome',['empty'=>'Os campos não podem estar vazios!']);
+            return redirect('/')->with('isempty', 'Os campos não podem estar vazios!');
             
         }
-        elseif($email != 'admin@admin.com' || $pass != '1111')
+        elseif($user == null)
         {
-            
-            return view('welcome',['notfound'=>'O dados inseridos não estão cadastrados!']);
+            return redirect('/')->with('noauth', 'Usuário não autorizado!');
+        }
+        elseif(password_verify($request->pass,$user->pass))
+        { 
+            $request->session()->put('person', $user->email);
+            $request->session()->put('rule', $user->roles);
+            $request->session()->put('name', $user->name);
+            $request->session()->put('pass', $user->pass);
+            return redirect('/home');
         }
         else
         {
-            
-            
-            $request->session()->put('person', 'Admin');
-            $request->session()->put('rule', 'Admin');
-            return redirect('/home');
+           
+            return redirect('/')->with('noauth', 'Usuário não autorizado!');
         }
     
     }
     
-    public function resetPass(Request $request)
+    /*
+     * /METHOD TO CREATE NEW USER
+     */
+    public function newUser(Request $request)
     {
-        $email = $request->mail;
         
-        if($email == '')
+        if(empty($request->mail) || empty($request->pass) || empty($request->funcao) || empty($request->nome))
         {
-            return view('reset',['empty'=>'O campo não pode estar vazio!']);
-            //$data = ['field'=>'empty','msg'=>'O campo não pode estar vazio!'];
-            //echo json_encode($data);
-            //return Response::json($data);
-        }
-        elseif($email == 'admin@admin.com')
-        {
-            
-            return view('reset',['ok'=>'Recuperado com sucesso! Vá ao seu email e siga as instruções.']);
+           return redirect('usuarios')->with('isempty', 'Os campos não podem estar vazios!');
         }
         else
         {
-           return view('reset',['notfound'=>'O e-mail inserido não está cadastrado!']); 
+           $new_user  = new User();
+           $pssw = password_hash($request->pass, PASSWORD_BCRYPT, ['cost' => '12']);
+           $result = $new_user->newUser('t_users', [ 
+               'name' => $request->nome,
+               'email' => $request->mail,
+               'pass' => $pssw,
+               'roles' => $request->funcao
+                ]
+            );
+           
+           if(!empty($result))
+           {
+               return redirect('usuarios')->with('nuser', 'Usuário cadastrado com sucesso!');
+           
+           }
+           else
+           {    
+               return redirect('usuarios')->with('isuser', 'Usuário já cadastrado. Tente com outro nome de usuário!');
+                
+            }
         }
-        
-             
+    }
+    /*
+     * /METHOD TO RESET PASSWORD
+     */
+    public function resetPass(Request $request)
+    {
+        $users = new USer();
+        $user = $users->getEmail('t_users', $request->mail);
+        if(empty($request->mail))
+        {
+            return redirect('reset')->with('isempty', 'O campo não pode estar vazio!');
+        }
+        elseif($user == null)
+        {
+           return redirect('reset')->with('noauth', 'Usuário não reconhecido!'); 
+        }
+        else
+        {
+            
+            return redirect('reset')->with('auth', 'Senha recuperada. Vá ao seu e-mail e siga as instruções!');
+        }
+           
     }
 }
