@@ -51,7 +51,7 @@
                                     @endif
                                     
                                 </div>
-                                <form method="post" action="{{ url('/autorization') }}">
+                                <form method="post" action="{{ route('authentication') }}">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">

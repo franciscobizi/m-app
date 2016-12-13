@@ -64,7 +64,7 @@ class UserController extends BaseController
             $request->session()->put('rule', $user->roles);
             $request->session()->put('name', $user->name);
             $request->session()->put('pass', $user->pass);
-            return redirect('/home');
+            return redirect('home');
         }
         else
         {

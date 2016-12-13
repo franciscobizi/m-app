@@ -21,7 +21,7 @@ Route::get('/', function () {
 */
 Route::get('reset', 'UserController@showReset');
 Route::post('reset', 'UserController@resetPass');
-Route::post('autorization', 'UserController@auth');
+Route::post('autorization', 'UserController@auth')->name('authentication');
 Route::get('home', 'UserController@profile');
 Route::get('logout', 'UserController@loGOut');
 /*
