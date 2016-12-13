@@ -14,17 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*
+ *Auth routes
+ * 
+*/
 Route::get('reset', 'UserController@showReset');
 Route::post('reset', 'UserController@resetPass');
 Route::post('autorization', 'UserController@auth');
 Route::get('home', 'UserController@profile');
 Route::get('logout', 'UserController@loGOut');
 /*
- *Admin routes
+ *Business routes
  * 
 */
 
-Route::get('usuarios', 'AController@AUsers');
-Route::get('militantes', 'AController@AClients');
-Route::get('eventos', 'AController@AEvents');
-Route::post('search', 'AController@MSearch');
+Route::get('usuarios', 'AController@AUsers')->name('all-users');
+Route::post('usuarios', 'UserController@newUser')->name('signup-user');
+Route::post('militantes', 'AController@MSearch')->name('search-m');
+Route::get('militantes', 'AController@AClients')->name('all-militants');
+Route::get('eventos', 'AController@AEvents')->name('all-events');

@@ -39,27 +39,26 @@
                             </li>
                             <li class="list-group-item text-muted">
                                 <div class="form-group">
-                                    @if( isset($empty))
-                                    <div class="text-danger text-center" style="font-weight: bold" >
-                                        {{ $empty }}
-                                    </div>
+                                    @if (session('isempty'))
+                                        <div class="alert alert-warning">
+                                            {{ session('isempty') }}
+                                        </div>
                                     @endif
-                                    
-                                    @if( isset($notfound))
-                                    <div class="text-warning text-center" style="font-weight: bold" >
-                                        {{ $notfound }}
-                                    </div>
+                                    @if (session('noauth'))
+                                        <div class="alert alert-danger">
+                                            {{ session('noauth') }}
+                                        </div>
                                     @endif
                                     
                                 </div>
                                 <form method="post" action="{{ url('/autorization') }}">
                                 {!! csrf_field() !!}
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
-                                    <input type="email" name="mail" class="form-control" placeholder="E-mail" required>
+                                    <input type="email" name="mail" id="id-user" class="form-control" placeholder="E-mail" >
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="pass" class="form-control" placeholder="Senha" required>
+                                    <input type="password" name="pass" id="id-pass" class="form-control" placeholder="Senha" >
                                 </div>
                                 
                                 <div class="form-group">
@@ -69,8 +68,9 @@
                             </li>
                             <li class="list-group-item text-muted">
                                <div class="form-group">
-                                    <button  class="btn btn-block">Entrar</button>
-                                </div>  
+                                    <button  id="submit" class="btn btn-block">Entrar</button>
+                                </div>
+                                </form>
                             </li>
                         </ul>
                     </div>

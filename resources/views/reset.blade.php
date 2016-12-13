@@ -44,28 +44,27 @@
                             </li>
                             <li class="list-group-item text-muted">
                                 <div class="form-group">
-                                    @if( isset($empty))
-                                    <div class="text-danger text-center" style="font-weight: bold" >
-                                        {{ $empty }}
-                                    </div>
+                                    @if (session('isempty'))
+                                        <div class="alert alert-warning">
+                                            {{ session('isempty') }}
+                                        </div>
                                     @endif
-                                    @if( isset($notfound))
-                                    <div class="text-warning text-center" style="font-weight: bold" >
-                                        {{ $notfound }}
-                                    </div>
+                                    @if (session('noauth'))
+                                        <div class="alert alert-danger">
+                                            {{ session('noauth') }}
+                                        </div>
                                     @endif
-                                    @if( isset($ok))
-                                    <div class="text-success text-center" style="font-weight: bold" >
-                                        {{ $ok }}
-                                    </div>
-                                  
+                                    @if (session('auth'))
+                                        <div class="alert alert-success">
+                                            {{ session('auth') }}
+                                        </div>
                                     @endif
                                 </div>
                                 <form method="post" action="{{ url('/reset') }}">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
-                                    <input type="email" name="mail" class="form-control" placeholder="E-mail" required>
+                                    <input type="email" name="mail" class="form-control" placeholder="E-mail">
                                 </div>
                                 
                                                

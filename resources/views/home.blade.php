@@ -7,26 +7,17 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-md-6">
-                    @if ($rule == 'User')
-                    
-                        <span class="fa-stack fa-4x" id="girar">
-                            <i class="fa fa-circle fa-stack-2x iten-color"></i>
-                            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                        </span>
-                    @endif
-                    @if ($rule == 'Admin')
-                    <a href="{{url('/usuarios')}}">
+                    <a href="{{route('all-users')}}">
                     <span class="fa-stack fa-4x" id="girar">
                             <i class="fa fa-circle fa-stack-2x iten-color"></i>
                             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
                     </span>
                     </a>
-                    @endif
                     <h4 class="text-muted">Usuários</h4>
                 </div>
                 
                 <div class="col-md-6">
-                    <a href='{{url('/militantes')}}'>
+                    <a href='{{route('all-militants')}}'>
                     <span class="fa-stack fa-4x" id="girar">
                             <i class="fa fa-circle fa-stack-2x iten-color"></i>
                             <i class="fa fa-users fa-stack-1x fa-inverse"></i>
@@ -37,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <a href='{{url('/eventos')}}'>
+                    <a href='{{route('all-events')}}'>
                     <span class="fa-stack fa-4x" id="girar">
                             <i class="fa fa-circle fa-stack-2x iten-color"></i>
                             <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
