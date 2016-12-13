@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 17, 2016, 11:47:56 PM
+    Author     : Taylorsoft
+*/
+
+body {
+  background: url("../img/bg.png") no-repeat center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.break{
+    padding: 40px;
+}
+
+.iten-color{
+    color: #222;
+    /*u388355933*/
+}
