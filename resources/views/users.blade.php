@@ -45,7 +45,7 @@
                                 <td >
                                     <a href="#Ausers" data-toggle="modal" title="Adicionar"><span class="glyphicon glyphicon-plus-sign" ></span></a>
                                     <a href="#eusers" data-toggle="modal" title="Editar"><span class="glyphicon glyphicon-edit" ></span></a>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#D" data-whatever="@mdo">Open modal for @mdo</button>
                                 </td>
                                 </form>
                             </tr>

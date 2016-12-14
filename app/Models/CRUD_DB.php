@@ -6,7 +6,7 @@ use App\Models\DBSingleton;
 class CRUD_DB
 {
  
-        private $table_name;
+        private $t_name;
         private $conn = null;
 
         public function __construct()
@@ -15,94 +15,103 @@ class CRUD_DB
 
         } 
 	/*
-         * METHOD TO READ ALL ROWS IN THE TABLE
+         * @METHOD TO READ ALL ROWS FROM THE TABLE
          */
-	public function select_all($table_name)
+	public function getRows($t_name)
 	{
-                $this->table_name = $table_name;
-                $query = " SELECT * FROM ".$this->table_name." ORDER BY id DESC";
+                $this->t_name = $t_name;
+                $query = " SELECT * FROM ".$this->t_name." ORDER BY id DESC";
                 $stmt = $this->conn->prepare($query);
-                $stmt->execute(); 
-                return $stmt;
+                $stmt->execute();
+                if($stmt->rowCount()>0)
+                {
+                    return $stmt;
+                }
+                else
+                {
+                    return false; 
+                }
         }
 	/*
-         * METHOD TO READ ON ROW IN THE TABLE
+         * @METHOD TO READ ONE ROW FROM THE TABLE
          */
-	public function select_one($table_name)
+	public function getRow($t_name,$id)
 	{
-		$this->table_name = $table_name;
-                $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? limit 0,1";
+		$this->t_name = $t_name;
+                $query = "SELECT * FROM " . $this->t_name . " WHERE id = ? limit 0,1";
                 $stmt = $this->conn->prepare( $query );
-		$stmt->bindParam(1, $_POST['id']);
+		$stmt->bindParam(1, $id);
 		$stmt->execute();
 		return $stmt;
 		
 	}
 	/*
-         * METHOD TO COUNT NUMBERS OF ROWS IN THE TABLE
+         * @METHOD TO COUNT NUMBERS OF ROWS IN THE TABLE
          */
-	public function count_all($table_name)
+	public function countRows($t_name)
 	{
 	
-		$this->table_name = $table_name;
-		$query = "SELECT id FROM ".$this->table_name."";
+		$this->t_name = $t_name;
+		$query = "SELECT id FROM ".$this->t_name."";
                 $stmt = $this->conn->prepare($query);
 		$stmt->execute();
                 $num = $stmt->rowCount();
                 return $num;
 	}
 	/*
-         * METHOD TO UPDATE ROW IN THE TABLE
+         * @METHOD TO UPDATE ROW IN THE TABLE
          */
-	public function update($table_name,$array_data)
+	public function updateRow($t_name,array $a)
 	{
-		$this->table_name = $table_name;
-                $query = "UPDATE
-					" . $this->table_name . "
-				SET
-					field1 = ?,
-					field2 = ?,
-					field3 = ?,
-					field4 = ?
-				WHERE
-					id = ?";
-	 
-		$stmt = $this->conn->prepare($query);
-                $rows = array($fields);
+		$this->t_name = $t_name;
                 
-		if($stmt->execute($rows))
+                $qry = "UPDATE $this->t_name SET";
+                $values = array();
+
+                foreach ($a as $field => $value) {
+                    $qry .= ' '.$field.' = :'.$field.',';
+                    $values[':'.$field] = $value;
+                }
+
+                $qry = substr($qry, 0, -1).';'; 
+
+                $q = $this->conn->prepare($qry);
+
+		if($q->execute($values))
 		{
-			return true;
+                    return true;
 		}else
 		{
-			return false;
+                    return false;
 		}
 	}
 	/*
-         * METHOD TO CREATE ROW IN THE TABLE
+         * @METHOD TO CREATE ROW IN THE TABLE
          */
-	public function create($table_name,$array_data)
+	public function setRow($t_name, array $a)
 	{
-		$this->table_name = $table_name;
-		$query = "INSERT INTO ".$this->table_name."(field1, field2,field3, field4) VALUES (:field1, :field2, :field3, :field4)')";
-                $stmt = $this->conn->prepare($query);
-                $rows = array(':field1'=>$_POST['field1'],':field2'=>$_POST['field2'],':field3'=>$_POST['field3'],':field4'=>$_POST['field4']); 
-        
-		if($stmt->execute($rows))
+		$this->t_name = $t_name;
+                
+                $keys = array_keys($a);
+                $sql = "INSERT INTO $this->t_name (".implode(", ",$keys).") \n";
+                $sql .= "VALUES ( :".implode(", :",$keys).")";        
+                $q = $this->conn->prepare($sql);
+                
+		if($q->execute($a))
 		{
-			return true;
+                    return true;
 		}else
 		{
-			return false;
+                    return false;
 		}
 	}
 	/*
-         * METHOD TO DELETE ROW IN THE TABLE
+         * @METHOD TO DELETE ROW FROM THE TABLE
          */
-	public function delete($table_name,$id)
+	public function removeRow($t_name,$id)
 	{
-		$this->table_name = $table_name;
-		$query = "DELETE FROM".$this->table_name."WHERE id = :id";
+		$this->t_name = $t_name;
+		$query = "DELETE FROM ".$this->t_name."WHERE id = :id";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		if($stmt->execute())

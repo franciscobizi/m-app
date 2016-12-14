@@ -14,12 +14,12 @@ class AController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /*
-     * METHOD THAT LISTS USERS
+     * @METHOD THAT LISTS USERS
      */
     public function AUsers(Request $request)
     {
         $u = new CRUD_DB();
-        $field = $u->select_all('t_users');
+        $field = $u->getRows('t_users');
         
         return view('users',[
             'usuario'=>$field,
@@ -31,7 +31,7 @@ class AController extends BaseController
         );
     }
     /*
-     * METHOD THAT LISTS MILITANTES
+     * @METHOD THAT LISTS MILITANTES
      */
     public function AClients(Request $request)
     {
@@ -54,7 +54,7 @@ class AController extends BaseController
         );
     }
     /*
-     * METHOD THAT SEARCH MILITANTE
+     * @METHOD THAT SEARCH MILITANTE
      */
     public function MSearch(Request $request)
     {
@@ -100,27 +100,62 @@ class AController extends BaseController
         
     }
     /*
-     * METHOD THAT LISTS EVENTS
+     * @METHOD THAT LISTS EVENTS
      */
-    public function AEvents(Request $request)
+    public function listEvents(Request $request)
     {
-        $events = [
-            'id'         => '1',
-            'desc'       => '7 Congresso do partido',
-            'local'      => 'Cabassango',
-            'resp'       => 'Felix Kuabi',
-            'data' => date('d-m-Y')
-            
+        $list = new CRUD_DB();
+        $events = $list->getRows('t_events');
+        if($events == false)
+        {
+            return view('events',[
+                'Empty'=>'',
+                'person'=>$request->session()->get('person'),
+                'rule'=>$request->session()->get('rule'),
+                'name'=>$request->session()->get('name'),
+                'pass'=>$request->session()->get('pass')
+                ]);
+        }
+        else
+        {
+            return view('events',[
+                'event'=>$events,
+                'person'=>$request->session()->get('person'),
+                'rule'=>$request->session()->get('rule'),
+                'name'=>$request->session()->get('name'),
+                'pass'=>$request->session()->get('pass')
+                ]
+            );
+        }
+    }
+    /*
+     * @METHOD THAT ADD EVENT
+     */
+    public function addEvents(Request $request)
+    {
+        $addEvent = new CRUD_DB();
+        $nE = [
+            'description'=> $request->desc,
+            'local'=> $request->local,
+            'locutor'=> $request->locutor,
+            'temp'=> $request->tempo,
+            'user_id'=> $request->uid
         ];
         
-        return view('events',[
-            'events'=>$events,
-            'person'=>$request->session()->get('person'),
-            'rule'=>$request->session()->get('rule'),
-            'name'=>$request->session()->get('name'),
-            'pass'=>$request->session()->get('pass')
-            ]
-        );
+        $result = $addEvent->setRow('t_events', $nE);
+        if(empty($request->desc) || empty($request->local) || empty($request->locutor) || empty($request->uid) || empty($request->tempo))
+        {
+           return redirect('eventos')->with('isempty', 'Os campos não podem estar vazios!'); 
+        }
+        elseif($result == TRUE)
+        {
+           return redirect('eventos')->with('sucess', 'Cadastrado com sucesso!'); 
+        }
+        else
+        {
+           return redirect('eventos')->with('nosucess', 'Problemas ao cadastrar. Tente novamente!'); 
+        }
+        
     }
     
     

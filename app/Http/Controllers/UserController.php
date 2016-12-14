@@ -38,7 +38,8 @@ class UserController extends BaseController
         $rule = $request->session()->get('rule');
         $name = $request->session()->get('name');
         $pass = $request->session()->get('pass');
-        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass]);
+        $id = $request->session()->get('id');
+        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass,'id'=>$id]);
     }
     /*
      * /METHOD TO AUTHENTICATION
@@ -64,6 +65,7 @@ class UserController extends BaseController
             $request->session()->put('rule', $user->roles);
             $request->session()->put('name', $user->name);
             $request->session()->put('pass', $user->pass);
+            $request->session()->put('id', $user->id);
             return redirect('home');
         }
         else

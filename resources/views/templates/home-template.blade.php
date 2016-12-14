@@ -303,7 +303,9 @@
                   <h4 class="modal-title" id="exampleModalLabel">Cadastrar evento</h4>
                 </div>
                 <div class="modal-body">
-                                        
+                    <form method="post" action="{{ route('add-events') }}">
+                        {!! csrf_field() !!}
+                               <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">                   
                                <div class="form-group">
                                     <div class="text-danger text-center" style="font-weight: bold" id="e-result">
                                     </div>
@@ -312,19 +314,20 @@
                                     <input type="text" name="desc" class="form-control" placeholder="Descrição" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="resp" class="form-control" placeholder="Responsável" required>
+                                    <input type="text" name="locutor" class="form-control" placeholder="Responsável" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="local" class="form-control" placeholder="Local do evento" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="time" name="tempo" title="Hora do evento" class="form-control" placeholder="Horás" required>
+                                    <input type="hidden" name="uid" value="{{session('id')}}" class="form-control"  required>
+                                    <input type="datetime-local" name="tempo" title="Hora do evento" class="form-control" placeholder="Horás" required>
                                 </div>
                                 
                 </div>
                 <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Cadastrar</button>
-                    
+                        <button id="add-Event" class="btn btn-primary">Cadastrar</button>
+                    </form>
                     <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     
                 </div>
@@ -524,7 +527,7 @@
           <!--Fim do modal-->
           
           <!--ModalDUsers-->                      
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal fade" id="D" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -598,21 +601,22 @@
           </div>
           <!--Fim do modal-->
           <!-- jQuery -->
-    <script src="{{ url('/front-end/js/jquery-1.12.2.min.js') }}"></script>
+    <!--script src="{{ url('/front-end/js/jquery-1.12.2.min.js') }}"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="{{ url('/front-end/js/ajax.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('/front-end/js/bootstrap.min.js') }}"></script>
     
    
     <script type="text/javascript">
-        $('#exampleModal').on('show.bs.modal', function (event) {
+        $('#D').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
+            modal.find('.modal-body textarea').val(recipient)
         }))
     </script>
    

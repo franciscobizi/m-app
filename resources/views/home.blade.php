@@ -28,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <a href='{{route('all-events')}}'>
+                    <a href='{{url('eventos')}}'>
                     <span class="fa-stack fa-4x" id="girar">
                             <i class="fa fa-circle fa-stack-2x iten-color"></i>
                             <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>

@@ -33,4 +33,5 @@ Route::get('usuarios', 'AController@AUsers')->name('all-users');
 Route::post('usuarios', 'UserController@newUser')->name('signup-user');
 Route::post('militantes', 'AController@MSearch')->name('search-m');
 Route::get('militantes', 'AController@AClients')->name('all-militants');
-Route::get('eventos', 'AController@AEvents')->name('all-events');
+Route::get('eventos', 'AController@listEvents');
+Route::post('eventos', 'AController@addEvents')->name('add-events');
