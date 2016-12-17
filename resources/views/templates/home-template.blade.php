@@ -15,6 +15,7 @@
         <link href="{{ url('/front-end/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url('/front-end/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url('/front-end/css/source-style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url('/front-end/css/chart.css') }}" rel="stylesheet" type="text/css">
         <!--fonts-->
         <link href="{{ url('/front-end/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
@@ -473,17 +474,20 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                           <div role="tabpanel" class="tab-pane active" id="home">
-                              <h4 class="text-muted">
+                              <h4 class="text-muted text-center">
                                Relatório semanal
                               </h4>
+                              <div id="pieChart" class="chart"></div>
+                                    
+                              
                           </div>
                           <div role="tabpanel" class="tab-pane" id="mensal">
-                              <h4 class="text-muted"> 
+                              <h4 class="text-muted text-center"> 
                                Relatório mensal
                               </h4>
                           </div>
                           <div role="tabpanel" class="tab-pane" id="anual">
-                              <h4 class="text-muted"> 
+                              <h4 class="text-muted text-center"> 
                                Relatório anual
                               </h4>
                           </div>
@@ -606,6 +610,7 @@
     <script src="{{ url('/front-end/js/ajax.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('/front-end/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('/front-end/js/chart.js') }}"></script>
     
    
     <script type="text/javascript">

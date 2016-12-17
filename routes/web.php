@@ -14,24 +14,32 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 /*
  *Auth routes
  * 
 */
-Route::get('reset', 'UserController@showReset');
-Route::post('reset', 'UserController@resetPass');
-Route::post('autorization', 'UserController@auth')->name('authentication');
-Route::get('home', 'UserController@profile')->name('user-profile');
-Route::get('logout', 'UserController@loGOut');
+Route::get('reset', 'AuthController@resetPage');
+Route::post('reset', 'AuthController@resetPass');
+Route::post('autorization', 'AuthController@auth')->name('authentication');
+Route::get('home', 'AuthController@userAcount')->name('user-profile');
+Route::get('logout', 'AuthController@logOut');
 /*
- *Business routes
+ * Users routes
  * 
 */
+Route::get('usuarios', 'UserController@listUsers')->name('all-users');
+Route::post('usuarios', 'UserController@addUser')->name('signup-user');
+/*
+ * Guest routes
+ * 
+*/
+Route::post('militantes', 'GuestController@MSearch')->name('search-m');
+Route::get('militantes', 'GuestController@listGuest')->name('all-militants');
+/*
+ * Events routes
+ * 
+*/
+Route::get('eventos', 'EventsController@listEvents');
+Route::post('eventos', 'EventsController@addEvents')->name('add-events');
 
-Route::get('usuarios', 'AController@AUsers')->name('all-users');
-Route::post('usuarios', 'UserController@newUser')->name('signup-user');
-Route::post('militantes', 'AController@MSearch')->name('search-m');
-Route::get('militantes', 'AController@AClients')->name('all-militants');
-Route::get('eventos', 'AController@listEvents');
-Route::post('eventos', 'AController@addEvents')->name('add-events');
+
