@@ -41,5 +41,11 @@ Route::get('militantes', 'GuestController@listGuest')->name('all-militants');
 */
 Route::get('eventos', 'EventsController@listEvents');
 Route::post('eventos', 'EventsController@addEvents')->name('add-events');
+/*
+ * Reports routes
+ * 
+*/
+Route::get('relatorios', 'ReportsController@listReports')->name('reports');
+
 
 

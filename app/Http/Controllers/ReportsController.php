@@ -10,66 +10,33 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\CRUD_DB;
 
-class EventsController extends BaseController
+class ReportsController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    
     /*
-     * @METHOD THAT ADD EVENT
+     * METHOD THAT LISTS EVENTS
      */
-    public function addEvents(Request $request)
+    public function listReports(Request $request)
     {
-        $addEvent = new CRUD_DB();
-        $nE = [
-            'description'=> $request->desc,
-            'local'=> $request->local,
-            'locutor'=> $request->locutor,
-            'temp'=> $request->tempo,
-            'user_id'=> $request->uid
+        $num = new CRUD_DB();
+        $users = $num->countRows('t_users');
+        $events = $num->countRows('t_events');
+        $guest = $num->countRows('t_guest');
+        $reports = [
+          'users'=>$users,
+          'events'=>$events,
+          'guest'=>$guest
         ];
         
-        $result = $addEvent->setRow('t_events', $nE);
-        if(empty($request->desc) || empty($request->local) || empty($request->locutor) || empty($request->uid) || empty($request->tempo))
-        {
-           return redirect('eventos')->with('isempty', 'Os campos não podem estar vazios!'); 
-        }
-        elseif($result == TRUE)
-        {
-           return redirect('eventos')->with('sucess', 'Cadastrado com sucesso!'); 
-        }
-        else
-        {
-           return redirect('eventos')->with('nosucess', 'Problemas ao cadastrar. Tente novamente!'); 
-        }
+        return view('reports',[
+            'reports'=>$reports,
+            'person'=>$request->session()->get('person'),
+            'rule'=>$request->session()->get('rule'),
+            'name'=>$request->session()->get('name'),
+            'pass'=>$request->session()->get('pass')
+        ]);
         
-    }
-    /*
-     * @METHOD THAT LISTS EVENTS
-     */
-    public function listEvents(Request $request)
-    {
-        $list = new CRUD_DB();
-        $events = $list->getRows('t_events');
-        if($events == false)
-        {
-            return view('events',[
-                'Empty'=>'',
-                'person'=>$request->session()->get('person'),
-                'rule'=>$request->session()->get('rule'),
-                'name'=>$request->session()->get('name'),
-                'pass'=>$request->session()->get('pass')
-            ]);
-        }
-        else
-        {
-            return view('events',[
-                'event'=>$events,
-                'person'=>$request->session()->get('person'),
-                'rule'=>$request->session()->get('rule'),
-                'name'=>$request->session()->get('name'),
-                'pass'=>$request->session()->get('pass')
-                ]
-            );
-        }
     }
 }

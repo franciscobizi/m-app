@@ -15,7 +15,7 @@
         <link href="{{ url('/front-end/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url('/front-end/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url('/front-end/css/source-style.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ url('/front-end/css/chart.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url('/front-end/css/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <!--fonts-->
         <link href="{{ url('/front-end/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">

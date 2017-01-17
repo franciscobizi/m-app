@@ -47,7 +47,7 @@
                 </div-->
                 
                 <div class="col-md-6">
-                    <a href="#relatorio" data-toggle="modal">
+                    <a href="{{route('reports')}}" data-toggle="modal">
                     <span class="fa-stack fa-4x" id="girar">
                             <i class="fa fa-circle fa-stack-2x iten-color"></i>
                             <i class="fa fa-signal fa-stack-1x fa-inverse"></i>
