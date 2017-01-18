@@ -41,7 +41,7 @@
           </button>
           <a class="navbar-brand" href="{{ route('user-profile') }}">G-MPLA</a>
         </div>
-        <form class="navbar-form navbar-left" role="search" method="post" action="{{ route('search-m') }}">
+        <form class="navbar-form navbar-left" role="search" method="post" action="{{ url('militantes') }}">
             {!! csrf_field() !!}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">      
             <div class="form-group  has-feedback">  
@@ -166,16 +166,14 @@
                   <h4 class="modal-title" id="exampleModalLabel">Cadastrar militante</h4>
                 </div>
                 <div class="modal-body">
-                                        
+                        <form method="post" action="{{ route('add-guest') }}">
+                        {!! csrf_field() !!}
+                               <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">                
                                <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
+                                    <input type="text" name="name" class="form-control" placeholder="Nome completo" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="nome" class="form-control" placeholder="Nome completo" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" name="data-nasc" title="Data de nascimento" class="form-control" placeholder="Data de nascimento" required>
+                                    <input type="date" name="birth" title="Data de nascimento" class="form-control" placeholder="Data de nascimento" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="grau" class="form-control" placeholder="Grau acadêmico" required>
@@ -186,8 +184,8 @@
                                 
                 </div>
                 <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Cadastrar</button>
-                    
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </form>
                     <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     
                 </div>

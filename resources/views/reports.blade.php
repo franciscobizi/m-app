@@ -38,16 +38,28 @@
                                 <div class="break"></div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="background-color: #196c4b; padding: 20px; width: 37%; font-weight: bold; margin-left: auto; margin-right: auto;"> <h3>68</h3></div>
+                                        <div class="img-circle text-center" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="background-color: #196c4b; padding: 20px; width: 37%; font-weight: bold; margin-left: auto; margin-right: auto;"> 
+                                            <h3>
+                                                {{ $users_r['d'] }}
+                                            </h3>
+                                        </div>
 
                                         <h3 class="text-center">Usuarios</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>10</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $guest_r['d'] }}
+                                            </h3>
+                                        </div>
                                         <h3 class="text-center">Militantes</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>18</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3> 
+                                                {{ $event_r['d'] }}
+                                            </h3>
+                                        </div>
                                         <h3 class="text-center">Eventos</h3>
                                     </div>
                                     <div class="col-md-3">
@@ -60,16 +72,28 @@
                                 <div class="break"></div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #196c4b; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>28</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #196c4b; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $users_r['s'] }}
+                                            </h3>
+                                        </div>
 
                                         <h3 class="text-center">Usuarios</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>38</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $guest_r['s'] }}
+                                            </h3>
+                                        </div>
                                         <h3 class="text-center">Militantes</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;"><h3>48</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $event_r['s'] }}
+                                            </h3>
+                                        </div>
                                         <h3 class="text-center">Eventos</h3>
                                     </div>
                                     <div class="col-md-3">
@@ -82,16 +106,28 @@
                                 <div class="break"></div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="background-color: #196c4b; padding: 20px; width: 37%; margin-left: auto; margin-right: auto;"> <h3>8</h3></div>
+                                        <div class="img-circle text-center" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="background-color: #196c4b; padding: 20px; width: 37%; margin-left: auto; margin-right: auto;">
+                                            <h3>
+                                                {{ $users_r['m'] }}
+                                            </h3>
+                                        </div>
 
                                         <h3 class="text-center">Usuarios</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>84</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $guest_r['m'] }}
+                                            </h3>
+                                        </div>
                                         <h3 class="text-center">Militantes</h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>88</h3></div>
+                                        <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $event_r['m'] }}
+                                            </h3>
+                                        </div>
                                         <h3 class="text-center">Eventos</h3>
                                     </div>
                                     <div class="col-md-3">
@@ -104,16 +140,28 @@
                               <div class="break"></div>
                               <div class="row">
                                   <div class="col-md-3">
-                                      <div class="img-circle text-center" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="background-color: #196c4b; padding: 20px; width: 37%; font-weight: bold; margin-left: auto; margin-right: auto;"> <h3>40</h3></div>
+                                      <div class="img-circle text-center" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="background-color: #196c4b; padding: 20px; width: 37%; font-weight: bold; margin-left: auto; margin-right: auto;">
+                                          <h3>
+                                                {{ $users_r['a'] }}
+                                            </h3>
+                                      </div>
                                       
                                       <h3 class="text-center">Usuarios</h3>
                                   </div>
                                   <div class="col-md-3">
-                                      <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>20</h3></div>
+                                      <div class="img-circle text-center" style="background-color: #1b6d85; padding: 20px; width: 37%;  margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $guest_r['a'] }}
+                                            </h3>
+                                      </div>
                                       <h3 class="text-center">Militantes</h3>
                                   </div>
                                   <div class="col-md-3">
-                                      <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;"> <h3>588</h3></div>
+                                      <div class="img-circle text-center" style="background-color: #b92c28; padding: 20px; width: 37%; margin-left: auto; margin-right: auto; font-weight: bold;">
+                                            <h3>
+                                                {{ $event_r['a'] }}
+                                            </h3>
+                                      </div>
                                       <h3 class="text-center">Eventos</h3>
                                   </div>
                                   <div class="col-md-3">

@@ -33,8 +33,9 @@ Route::post('usuarios', 'UserController@addUser')->name('signup-user');
  * Guest routes
  * 
 */
-Route::post('militantes', 'GuestController@MSearch')->name('search-m');
+//Route::post('militantes', 'GuestController@MSearch')->name('search-m');
 Route::get('militantes', 'GuestController@listGuest')->name('all-militants');
+Route::post('militantes', 'GuestController@addGuest')->name('add-guest');
 /*
  * Events routes
  * 

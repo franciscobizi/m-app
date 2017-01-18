@@ -4,6 +4,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    @if (session('isempty'))
+                        <div class="alert alert-warning">
+                            {{ session('isempty') }}
+                        </div>
+                    @endif
+                    @if (session('isuser'))
+                        <div class="alert alert-danger">
+                            {{ session('isuser') }}
+                        </div>
+                    @endif
+                    @if (session('nuser'))
+                        <div class="alert alert-success">
+                            {{ session('nuser') }}
+                        </div>
+                    @endif
                     <h2 class="text-muted">Lista de militantes do Partido</h2>
                     <br>
                     <div class="table-responsive">    

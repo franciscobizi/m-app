@@ -45,8 +45,29 @@ class CRUD_DB
 		return $stmt;
 		
 	}
+        /*
+         * @METHOD TO READ ONE ROW FROM THE TABLE
+         */
+	public function getRowGuest($t_name,$name)
+	{
+		$this->t_name = $t_name;
+                $query = "SELECT name FROM " . $this->t_name . " WHERE name = ? limit 0,1";
+                $stmt = $this->conn->prepare( $query );
+		$stmt->bindParam(1, $name);
+                $stmt->execute();
+                if($stmt->rowCount() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+		
+		
+	}
 	/*
-         * @METHOD TO COUNT NUMBERS OF ROWS IN THE TABLE
+         * METHOD TO COUNT NUMBERS OF ROWS IN THE TABLE
          */
 	public function countRows($t_name)
 	{
@@ -58,8 +79,22 @@ class CRUD_DB
                 $num = $stmt->rowCount();
                 return $num;
 	}
+        /*
+         * METHOD TO COUNT NUMBERS OF ROWS IN THE TABLE
+         */
+        public function getRowsByDate($t_name, $days)
+	{
+                $today = date('Y-m-d');
+                $range = date('Y-m-d', strtotime("-$days days"));
+		$this->t_name = $t_name;
+		$query = "SELECT * FROM $this->t_name WHERE created_at BETWEEN '$range' AND '$today' ";
+                $stmt = $this->conn->prepare($query);
+		$stmt->execute();
+                $num = $stmt->rowCount();
+                return $num;
+	}
 	/*
-         * @METHOD TO UPDATE ROW IN THE TABLE
+         * METHOD TO UPDATE ROW IN THE TABLE
          */
 	public function updateRow($t_name,array $a)
 	{
@@ -103,6 +138,23 @@ class CRUD_DB
 		}else
 		{
                     return false;
+		}
+	}
+        /*
+         * @METHOD TO CREATE ROW IN THE TABLE
+         */
+	public function setRowToMany($t_name, array $a)
+	{
+		$this->t_name = $t_name;
+                
+                $keys = array_keys($a);
+                $sql = "INSERT INTO $this->t_name (".implode(", ",$keys).") \n";
+                $sql .= "VALUES ( :".implode(", :",$keys).")";        
+                $q = $this->conn->prepare($sql);
+                
+		if($q->execute($a))
+		{
+                    return $last_id = $this->conn->lastInsertId();
 		}
 	}
 	/*
