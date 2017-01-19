@@ -2,6 +2,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\T_adresse;
 
 class T_guest extends Model
 {
@@ -10,6 +12,6 @@ class T_guest extends Model
      */
     public function post()
     {
-        return $this->belongsTo('App\Models\T_guest','guestid');
+        return $this->hasMany(T_adresse::class,'id');
     }
 }

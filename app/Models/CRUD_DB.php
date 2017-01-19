@@ -15,7 +15,7 @@ class CRUD_DB
 
         } 
 	/*
-         * @METHOD TO READ ALL ROWS FROM THE TABLE
+         * METHOD TO READ ALL ROWS FROM THE TABLE
          */
 	public function getRows($t_name)
 	{
@@ -32,8 +32,21 @@ class CRUD_DB
                     return false; 
                 }
         }
+        /*
+         * METHOD TO READ ALL ROWS FROM THE TABLE
+         */
+	public function getHasMany($tb1,$tb2)
+	{
+                
+                $query = "SELECT t1.id, t1.name, t1.status, t1.created_at, t1.grau, t1.grole, t1.birth, t2.phone, t2.email, t2.city, t2.adress, t2.guestid FROM $tb1 AS t1, "
+                        . "$tb2 AS t2 WHERE t1.id = t2.guestid ORDER BY id DESC";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute();
+                //$row = $stmt->fetch(\PDO::FETCH_OBJ);
+                return $stmt;
+        }
 	/*
-         * @METHOD TO READ ONE ROW FROM THE TABLE
+         * METHOD TO READ ONE ROW FROM THE TABLE
          */
 	public function getRow($t_name,$id)
 	{
@@ -160,12 +173,12 @@ class CRUD_DB
 	/*
          * @METHOD TO DELETE ROW FROM THE TABLE
          */
-	public function removeRow($t_name,$id)
+	public function removeRow($t_name,$field, $id)
 	{
 		$this->t_name = $t_name;
-		$query = "DELETE FROM ".$this->t_name."WHERE id = :id";
+		$query = "DELETE FROM ".$this->t_name." WHERE $field = :id";
 		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->bindParam(':id', $id, \PDO::PARAM_INT);
 		if($stmt->execute())
 		{
 			return true;

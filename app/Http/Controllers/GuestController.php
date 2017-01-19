@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\CRUD_DB;
+use App\Models\T_guest;
 
 class GuestController extends BaseController
 {
@@ -19,17 +20,12 @@ class GuestController extends BaseController
      */
     public function listGuest(Request $request)
     {
-        $militantes = [
-            'id'         => '1',
-            'name'       => 'Marcos Mbanza',
-            'email'      => 'marcos@marcos.com',
-            'fone'       => '+244943738336',
-            'created_at' => date('d-m-Y')
-            
-        ];
+        $comments = new CRUD_DB();
+        $militantes = $comments->getHasMany('t_guests','t_adresses');
+        
         
         return view('clients',[
-            'usuarios'=>$militantes,
+            'guests'=>$militantes,
             'person'=>$request->session()->get('person'),
             'rule'=>$request->session()->get('rule'),
             'name'=>$request->session()->get('name'),
@@ -42,7 +38,7 @@ class GuestController extends BaseController
      */
     public function addGuest(Request $request)
     {
-        if(empty($request->name) || empty($request->birth) || empty($request->grau) || empty($request->phone))
+        if(empty($request->nome) || empty($request->birth) || empty($request->grau) || empty($request->phone) || empty($request->morada) || empty($request->cidade) || empty($request->mail) || empty($request->func))
         {
             return redirect('militantes')->with('isempty', 'Os campos não podem estar vazios!');
         }
@@ -50,29 +46,30 @@ class GuestController extends BaseController
         {
         
             $guest = [
-                'name' => $request->name,
+                'name' => $request->nome,
                 'birth' => $request->birth,
                 'grau'  => $request->grau,
-                'grole' => '',
+                'grole' => $request->func,
                 'created_at' => date('Y-m-d')
 
             ];
+            $guest = array_map('strip_tags', $guest);
+            $guest = array_map('trim', $guest);
+            $nome = strip_tags($request->nome);
+            $nome = trim($nome);
             
             $insert = new CRUD_DB();
-            $name = $insert->getRowGuest('t_guest', $request->name);
+            $name = $insert->getRowGuest('t_guests', $nome);
             
             if($name == true)
             {
                 return redirect('militantes')->with('isuser', 'Já existe um militante com esse nome!');
-
-            }
+}
             else
             { 
-                $lastId = $insert->setRowToMany('t_guest', $guest);
-                $insert->setRow('t_adress', ['city'=>'','adress'=>'','email'=>'','phone'=>$request->phone,'guestid'=>$lastId,'created_at'=>date('Y-m-d')]);
-                $insert->setRow('t_cotas', ['cota'=>'','de'=>'','para'=>'','guestid'=>$lastId,'created_at'=>date('Y-m-d')]);
+                $lastId = $insert->setRowToMany('t_guests', $guest);
+                $insert->setRow('t_adresses', ['city'=>$request->cidade,'adress'=>$request->morada,'email'=>$request->mail,'phone'=>$request->phone,'guestid'=>$lastId,'created_at'=>date('Y-m-d')]);
                 return redirect('militantes')->with('nuser', 'Militante cadastrado com sucesso!');
-
             }
         }
     }
@@ -81,23 +78,51 @@ class GuestController extends BaseController
      */
     public function updateGuest(Request $request)
     {
-        $militantes = [
-            'id'         => '1',
-            'name'       => 'Marcos Mbanza',
-            'email'      => 'marcos@marcos.com',
-            'fone'       => '+244943738336',
-            'created_at' => date('d-m-Y')
-            
-        ];
+        if(empty($request->nome) || empty($request->birth) || empty($request->grau) || empty($request->phone) || empty($request->morada) || empty($request->cidade) || empty($request->mail) || empty($request->func))
+        {
+            return redirect('militantes')->with('isempty', 'Os campos não podem estar vazios!');
+        }
+        else
+        {
         
-        return view('clients',[
-            'usuarios'=>$militantes,
-            'person'=>$request->session()->get('person'),
-            'rule'=>$request->session()->get('rule'),
-            'name'=>$request->session()->get('name'),
-            'pass'=>$request->session()->get('pass')
-            ]
-        );
+            $guest = [
+                'name' => $request->nome,
+                'birth' => $request->birth,
+                'grau'  => $request->grau,
+                'grole' => $request->func,
+                'created_at' => date('Y-m-d')
+
+            ];
+            
+            $adress =  [
+                'city'=>$request->cidade,
+                'adress'=>$request->morada,
+                'email'=>$request->mail,
+                'phone'=>$request->phone,
+                'guestid'=>$lastId,
+                'created_at'=>date('Y-m-d')
+            ];
+            
+            $guest = array_map('strip_tags', $guest);
+            $guest = array_map('trim', $guest);
+            
+            $lastId = $insert->upd('t_guests', $guest);
+            $insert->setRow('t_adresses', $adress);
+            return redirect('militantes')->with('nuser', 'Militante cadastrado com sucesso!');
+            
+        } 
+    }
+    /*
+     * METHOD TO REMOVE MILITANTES FROM THE SYSTEM
+     */
+    public function removeGuest(Request $request)
+    {
+        $remove = new CRUD_DB();
+        $remove->removeRow('t_guests','id', $request->gid);
+        $remove->removeRow('t_adresses','guestid', $request->gid);
+        
+        return redirect('militantes')->with('duser', 'Militante deletado com sucesso!');
+        
     }
     
 }

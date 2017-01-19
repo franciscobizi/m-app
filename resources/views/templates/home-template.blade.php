@@ -24,6 +24,7 @@
         <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Lobster:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+        <script src="{{ url('/front-end/js/jquery-1.12.2.min.js') }}"></script>
         
         
     </head>
@@ -157,140 +158,11 @@
             </div>
           </div>
           <!--Fim do modal-->
-          <!--ModalAMilitante-->                      
-          <div class="modal fade" id="Amilitante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Cadastrar militante</h4>
-                </div>
-                <div class="modal-body">
-                        <form method="post" action="{{ route('add-guest') }}">
-                        {!! csrf_field() !!}
-                               <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">                
-                               <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Nome completo" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" name="birth" title="Data de nascimento" class="form-control" placeholder="Data de nascimento" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="grau" class="form-control" placeholder="Grau acadêmico" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="phone" name="phone" class="form-control" placeholder="Telefone" required>
-                                </div>
-                                
-                </div>
-                <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        </form>
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
-          
-          <!--ModalEMilitante-->                      
-          <div class="modal fade" id="emilitante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Editar militante</h4>
-                </div>
-                <div class="modal-body">
-                    <div>
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#pessoal" aria-controls="home" role="tab" data-toggle="tab">Dados pessoais</a></li>
-                          <li role="presentation"><a href="#endereco" aria-controls="mensal" role="tab" data-toggle="tab">Endereço</a></li>
-                          <li role="presentation"><a href="#cotas" aria-controls="anual" role="tab" data-toggle="tab">Cotas</a></li>
-                          
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                          <div role="tabpanel" class="tab-pane active" id="pessoal">
-                              <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="nome" class="form-control" placeholder="Nome completo" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" id="data-nasc" title="Data de nascimento" class="form-control" placeholder="Data de nascimento" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="grau" class="form-control" placeholder="Grau acadêmico" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="func" class="form-control" placeholder="Função" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="filiacao" class="form-control" placeholder="Filiação" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="file" id="file" class="form-control" title="Carrega foto do militante" placeholder="Fotografia" >
-                                </div>
-                          </div>
-                          <div role="tabpanel" class="tab-pane" id="endereco">
-                              <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="cidade" class="form-control" placeholder="Cidade" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="morada" class="form-control" placeholder="Morada" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="email" class="form-control" placeholder="E-mail" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="phone" id="phone" class="form-control" placeholder="Telefone" required>
-                                </div>
-                          </div>
-                          <div role="tabpanel" class="tab-pane" id="cotas">
-                              <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="status" class="form-control" placeholder="Status" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="cota" class="form-control" placeholder="Cotas" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" id="p1" title="Pagar cota de" class="form-control" placeholder="De" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="date" id="p2" title="Pagar cota até" class="form-control" placeholder="Para" required>
-                                </div>
-                          </div>
-                          
-                        </div>
-
-                    </div>         
-                             
-                </div>
-                <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Guardar</button>
-                    
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
+          <!--GuestModels-->
+          @include('modals.guests.eguest')
+          @include('modals.guests.aguest')
+          @include('modals.guests.dguest')
+          <!--EndOfGuestModels-->
 
           
           <!--ModalAEvent-->                      
@@ -556,28 +428,7 @@
             </div>
           </div>
           <!--Fim do modal-->
-          <!--ModalDMilitantes-->                      
-          <div class="modal fade" id="dmilitante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel"><i class="glyphicon glyphicon-warning-sign"></i> Deletar militante</h4>
-                </div>
-                <div class="modal-body">
-                                        
-                    <h4 class="text-center text-muted">Tens certeza de que pretendes deletar?</h4>            
-                                
-                </div>
-                <div class="modal-footer">
-                       
-                    <button id="e-btn" class="btn btn-primary">Deletar</button>
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <!--Fim do modal-->
           <!--ModalDEvento-->                      
           <div class="modal fade" id="devento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -603,8 +454,8 @@
           </div>
           <!--Fim do modal-->
           <!-- jQuery -->
-    <!--script src="{{ url('/front-end/js/jquery-1.12.2.min.js') }}"></script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script-->
     <script src="{{ url('/front-end/js/ajax.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('/front-end/js/bootstrap.min.js') }}"></script>
@@ -612,16 +463,45 @@
     
    
     <script type="text/javascript">
-        $('#D').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body textarea').val(recipient)
-        }))
-    </script>
+        //Verify data
+$('#guestModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget); // Button that triggered the modal
+  var description = button.data('title'); // Extract info from data-* attributes
+  var bi = button.data('bi');
+  var mail = button.data('mail');
+  var fone = button.data('fone');
+  var grau = button.data('grau');
+  var city = button.data('city');
+  var grole = button.data('grole');
+  var morada = button.data('morada');
+  var gstatus = button.data('status');
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this);
+  modal.find('.modal-title').text("Editar dados do Sr(a) " + description);
+  modal.find('#nome').val(description);
+  modal.find('#bi').val(bi);
+  modal.find('#mail').val(mail);
+  modal.find('#fone').val(fone);
+  modal.find('#grau').val(grau);
+  modal.find('#city').val(city);
+  modal.find('#grole').val(grole);
+  modal.find('#morada').val(morada);
+  modal.find('#gstatus').val(gstatus);
+  
+});
+    
+$('#deleteGuestModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget); 
+  var description = button.data('title');
+  var id = button.data('id');
+  
+  var modal = $(this);
+  modal.find('#guest-name').text("Tens certeza de que pretendes deletar o(a) Sr(a) " + description + "?");
+  modal.find('#gid').val(id);
+  
+});
+</script>
    
     </body>
 </html>
