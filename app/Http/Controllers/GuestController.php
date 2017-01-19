@@ -29,6 +29,7 @@ class GuestController extends BaseController
             'person'=>$request->session()->get('person'),
             'rule'=>$request->session()->get('rule'),
             'name'=>$request->session()->get('name'),
+            'noth' => $request->session()->get('noth'),
             'pass'=>$request->session()->get('pass')
             ]
         );

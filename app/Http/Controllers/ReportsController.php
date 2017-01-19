@@ -43,11 +43,16 @@ class ReportsController extends BaseController
             'a' => $r_event_a
         ];
         
+        $r_guest_d = $num->getRowsByDate('t_guests',0);
+        $r_guest_s = $num->getRowsByDate('t_guests',7);
+        $r_guest_m = $num->getRowsByDate('t_guests',30);
+        $r_guest_a = $num->getRowsByDate('t_guests',365);
+        
         $guest_r = [
-            'd' => '0',
-            's' => '0',
-            'm' => '0',
-            'a' => '0'
+            'd' => $r_guest_d,
+            's' => $r_guest_s,
+            'm' => $r_guest_m,
+            'a' => $r_guest_a
         ];
         
         return view('reports',[
@@ -57,6 +62,7 @@ class ReportsController extends BaseController
             'person' => $request->session()->get('person'),
             'rule' => $request->session()->get('rule'),
             'name' => $request->session()->get('name'),
+            'noth' => $request->session()->get('noth'),
             'pass' => $request->session()->get('pass')
         ]);
         

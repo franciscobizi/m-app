@@ -53,7 +53,7 @@
         </form>
         <div id="navbar" class="navbar-collapse collapse pull-right">
           <ul class="nav navbar-nav">
-            <li><a href="#notification" data-toggle="modal" ><i class='glyphicon glyphicon-bell'></i> Notificação</a></li>
+              <li><a href="#notification" data-toggle="modal" ><i class='glyphicon glyphicon-bell'></i> Notificações <span class="badge">{{ $noth }}</span></a></li>
             <li><a href="#ajuda" data-toggle="modal" ><i class='glyphicon glyphicon-question-sign'></i> Ajuda</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='glyphicon glyphicon-user'></i> {{$name}} <span class="caret"></span></a>

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\USer;
+use App\Models\CRUD_DB;
 
 class AuthController extends BaseController
 {
@@ -39,7 +40,8 @@ class AuthController extends BaseController
         $name = $request->session()->get('name');
         $pass = $request->session()->get('pass');
         $id = $request->session()->get('id');
-        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass,'id'=>$id]);
+        $noth = $request->session()->get('noth');
+        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass,'id'=>$id, 'noth'=>$noth]);
     }
     /*
      * /METHOD TO AUTHENTICATION
@@ -61,11 +63,14 @@ class AuthController extends BaseController
         }
         elseif(password_verify($request->pass,$user->pass))
         { 
+            $num = new CRUD_DB();
+            $r_event_d = $num->getRowsByDate('t_events',2);
             $request->session()->put('person', $user->email);
             $request->session()->put('rule', $user->roles);
             $request->session()->put('name', $user->name);
             $request->session()->put('pass', $user->pass);
             $request->session()->put('id', $user->id);
+            $request->session()->put('noth', $r_event_d);
             return redirect('home');
         }
         else
