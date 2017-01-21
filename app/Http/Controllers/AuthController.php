@@ -35,13 +35,15 @@ class AuthController extends BaseController
      */
     public function userAcount(Request $request)
     {
+        $listN = new CRUD_DB();
+        $listN->getPush('t_events', 10);
         $person = $request->session()->get('person');
         $rule = $request->session()->get('rule');
         $name = $request->session()->get('name');
         $pass = $request->session()->get('pass');
         $id = $request->session()->get('id');
         $noth = $request->session()->get('noth');
-        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass,'id'=>$id, 'noth'=>$noth]);
+        return view('home',['person'=>$person,'rule'=>$rule,'name'=>$name,'pass'=>$pass,'id'=>$id, 'noth'=>$noth, 'listN'=> $listN->notification]);
     }
     /*
      * /METHOD TO AUTHENTICATION
@@ -64,7 +66,7 @@ class AuthController extends BaseController
         elseif(password_verify($request->pass,$user->pass))
         { 
             $num = new CRUD_DB();
-            $r_event_d = $num->getRowsByDate('t_events',2);
+            $r_event_d = $num->getRowsByDate('t_events',10);
             $request->session()->put('person', $user->email);
             $request->session()->put('rule', $user->roles);
             $request->session()->put('name', $user->name);

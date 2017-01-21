@@ -33,7 +33,7 @@ Route::post('usuarios', 'UserController@addUser')->name('signup-user');
  * Guest routes
  * 
 */
-//Route::post('militantes', 'GuestController@MSearch')->name('search-m');
+Route::post('search', 'GuestController@searchGuest');
 Route::get('militantes', 'GuestController@listGuest')->name('all-militants');
 Route::post('add-guest', 'GuestController@addGuest');
 Route::post('militantes', 'GuestController@updateGuest')->name('edit-guest');

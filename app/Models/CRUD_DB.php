@@ -2,12 +2,14 @@
 
 namespace App\Models;
 use App\Models\DBSingleton;
+use PDO;
 
 class CRUD_DB
 {
  
         private $t_name;
         private $conn = null;
+        public $notification;
 
         public function __construct()
         {
@@ -45,6 +47,25 @@ class CRUD_DB
                 //$row = $stmt->fetch(\PDO::FETCH_OBJ);
                 return $stmt;
         }
+        
+        public function getRelation(array $table, $params, $fields)
+        {
+            $t1 = $table[0];
+            $t2 = $table[1];
+            $data = [];
+            $query = "SELECT {$fields} FROM {$t1} AS t1, {$t2} AS t2  {$params} limit 0,1";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            while($obj = $stmt->fetch(PDO::FETCH_OBJ))
+            {
+
+                    $data[] = $obj;
+
+            }
+            return $data;
+            
+        }
+        
 	/*
          * METHOD TO READ ONE ROW FROM THE TABLE
          */
@@ -105,6 +126,20 @@ class CRUD_DB
 		$stmt->execute();
                 $num = $stmt->rowCount();
                 return $num;
+	}
+        /*
+         * METHOD TO PUSH NOTIFICATIONS FROM TABLE
+         */
+        public function getPush($t_name, $days)
+	{
+                $today = date('Y-m-d');
+                $range = date('Y-m-d', strtotime("-$days days"));
+		$this->t_name = $t_name;
+		$query = "SELECT * FROM $this->t_name WHERE created_at BETWEEN '$range' AND '$today' ";
+                $stmt = $this->conn->prepare($query);
+		$stmt->execute();
+                
+                return $this->notification = $stmt;
 	}
 	/*
          * METHOD TO UPDATE ROW IN THE TABLE

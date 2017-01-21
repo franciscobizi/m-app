@@ -12,10 +12,8 @@
         <meta name="description" content="Guia turístico na palma da mão">
         <meta name="keywords" content="MPLA" />
         <!--styles-->
-        <link href="{{ url('/front-end/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url('/front-end/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url('/front-end/css/source-style.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ url('/front-end/css/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <!--fonts-->
         <link href="{{ url('/front-end/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
@@ -28,7 +26,7 @@
         
         
     </head>
-    <body style="background-color: #EEE">
+    <body>
         
         <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,11 +40,11 @@
           </button>
           <a class="navbar-brand" href="{{ route('user-profile') }}">G-MPLA</a>
         </div>
-        <form class="navbar-form navbar-left" role="search" method="post" action="{{ url('militantes') }}">
+        <form class="navbar-form navbar-left" role="search" method="post" action="{{ url('search') }}">
             {!! csrf_field() !!}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">      
             <div class="form-group  has-feedback">  
-            <input type="text" class="form-control placeholder" name="msearch" placeholder="Nome, telefone, cartão...">
+            <input type="text" class="form-control placeholder" name="search" placeholder="Por número de telefone">
             <a><span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span></a>
             </div>
                   
@@ -385,9 +383,33 @@
                   <h4 class="modal-title" id="exampleModalLabel">Notificação</h4>
                 </div>
                 <div class="modal-body">
-                   
-                   <h4 class="text-center text-muted">Nenhuma notificação</h4>
-                                
+                   @if( $noth == 0 )
+                        <h4 class="text-center text-muted">Nenhuma notificação</h4>
+                   @else
+                    <div class="table-responsive">
+                        <h4 class="text-center text-muted">Eventos em eminência</h4>  
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Descrição</th>
+                          <th>Local</th>
+                          <th>Responsável</th>
+                          <th>Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($listN as $events)
+                            <tr style="background-color: #FFF">
+                                <td>{{$events['description']}}</td>
+                                <td>{{$events['local']}}</td>
+                                <td>{{$events['locutor']}}</td>
+                                <td>{{$events['temp']}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                       </table>
+                   @endif
+                    </div>             
                 </div>
                 <div class="modal-footer">
                        

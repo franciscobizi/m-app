@@ -44,32 +44,35 @@ class EventsController extends BaseController
         
     }
     /*
-     * @METHOD THAT LISTS EVENTS
+     * METHOD THAT LISTS EVENTS
      */
     public function listEvents(Request $request)
     {
         $list = new CRUD_DB();
         $events = $list->getRows('t_events');
+        $list->getPush('t_events', 10);
         if($events == false)
         {
             return view('events',[
-                'Empty'=>'',
-                'person'=>$request->session()->get('person'),
-                'rule'=>$request->session()->get('rule'),
-                'name'=>$request->session()->get('name'),
+                'Empty' => '',
+                'person' => $request->session()->get('person'),
+                'rule' => $request->session()->get('rule'),
+                'name' => $request->session()->get('name'),
                 'noth' => $request->session()->get('noth'),
-                'pass'=>$request->session()->get('pass')
+                'pass' => $request->session()->get('pass'),
+                'listN'=> $list->notification
             ]);
         }
         else
         {
             return view('events',[
-                'event'=>$events,
-                'person'=>$request->session()->get('person'),
-                'rule'=>$request->session()->get('rule'),
-                'name'=>$request->session()->get('name'),
+                'event' => $events,
+                'person' => $request->session()->get('person'),
+                'rule' => $request->session()->get('rule'),
+                'name' => $request->session()->get('name'),
                 'noth' => $request->session()->get('noth'),
-                'pass'=>$request->session()->get('pass')
+                'pass' => $request->session()->get('pass'),
+                'listN'=> $list->notification
                 ]
             );
         }

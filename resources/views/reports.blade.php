@@ -33,7 +33,7 @@
                         </ul>
 
                         <!-- Tab panes -->
-                        <div class="tab-content">
+                        <div class="tab-content" style=" background-color: #FFF">
                           <div role="tabpanel" class="tab-pane active" id="diario">
                                 <div class="break"></div>
                                 <div class="row">

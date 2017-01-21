@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\CRUD_DB;
 use App\Models\T_guest;
+use App\Models\Model;
 
 class GuestController extends BaseController
 {
@@ -22,7 +23,7 @@ class GuestController extends BaseController
     {
         $comments = new CRUD_DB();
         $militantes = $comments->getHasMany('t_guests','t_adresses');
-        
+        $comments->getPush('t_events',10);
         
         return view('clients',[
             'guests'=>$militantes,
@@ -30,7 +31,8 @@ class GuestController extends BaseController
             'rule'=>$request->session()->get('rule'),
             'name'=>$request->session()->get('name'),
             'noth' => $request->session()->get('noth'),
-            'pass'=>$request->session()->get('pass')
+            'pass'=>$request->session()->get('pass'),
+            'listN'=> $comments->notification
             ]
         );
     }
@@ -123,6 +125,40 @@ class GuestController extends BaseController
         $remove->removeRow('t_adresses','guestid', $request->gid);
         
         return redirect('militantes')->with('duser', 'Militante deletado com sucesso!');
+        
+    }
+    /*
+     * METHOD TO SEARCH A MILITANTE FROM THE TABLE
+     */
+    public function searchGuest(Request $request)
+    {
+        $criteria = $request->search;
+        $guest = new CRUD_DB();
+        $guest->getPush('t_events',10);
+        $tab = ['t_guests','t_adresses'];
+        $rows = $guest->getRelation($tab,"WHERE t1.id = t2.guestid AND t2.phone = {$criteria} ",""
+                . "t1.id, t1.name, t1.status, t1.created_at, t1.grau, t1.grole, t1.birth, t2.phone, t2.email, t2.city, t2.adress, t2.guestid");
+        
+        return view('clients',[
+            'buscar' => $rows,
+            'person'=>$request->session()->get('person'),
+            'rule'=>$request->session()->get('rule'),
+            'name'=>$request->session()->get('name'),
+            'noth' => $request->session()->get('noth'),
+            'pass'=>$request->session()->get('pass'),
+            'listN'=> $guest->notification
+            ]);
+        /*if($rows == false)
+        {
+            //dd("Ta no falso");
+            return redirect('militantes')->with(['search' => $rows ]);
+        }
+        else
+        {
+            //dd("Ta no True");   
+            return redirect('militantes')->with(['search' => $rows ]);
+        }*/
+        
         
     }
     

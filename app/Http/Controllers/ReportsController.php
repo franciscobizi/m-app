@@ -21,6 +21,7 @@ class ReportsController extends BaseController
     public function listReports(Request $request)
     {
         $num = new CRUD_DB();
+        $num->getPush('t_events',10);
         
         $r_user_d = $num->getRowsByDate('t_users',0);
         $r_user_s = $num->getRowsByDate('t_users',7);
@@ -63,7 +64,8 @@ class ReportsController extends BaseController
             'rule' => $request->session()->get('rule'),
             'name' => $request->session()->get('name'),
             'noth' => $request->session()->get('noth'),
-            'pass' => $request->session()->get('pass')
+            'pass' => $request->session()->get('pass'),
+            'listN'=> $num->notification
         ]);
         
     }

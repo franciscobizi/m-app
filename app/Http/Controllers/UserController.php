@@ -56,6 +56,7 @@ class UserController extends BaseController
     {
         $u = new CRUD_DB();
         $field = $u->getRows('t_users');
+        $u->getPush('t_events',10);
         
         return view('users',[
             'usuario'=>$field,
@@ -63,7 +64,8 @@ class UserController extends BaseController
             'rule'=>$request->session()->get('rule'),
             'name'=>$request->session()->get('name'),
             'noth' => $request->session()->get('noth'),
-            'pass'=>$request->session()->get('pass')
+            'pass'=>$request->session()->get('pass'),
+            'listN' => $u->notification
             ]
         );
     }
