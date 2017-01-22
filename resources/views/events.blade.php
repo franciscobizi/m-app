@@ -22,6 +22,11 @@
                             {{ session('sucess') }}
                         </div>
                     @endif
+                    @if (session('dsucess'))
+                        <div class="alert alert-success">
+                            {{ session('dsucess') }}
+                        </div>
+                    @endif
                     <h2 class="text-muted">Lista de eventos</h2>
                     <br>
                     
@@ -62,9 +67,9 @@
                                 <td>{{$events['locutor']}}</td>
                                 <td>{{$events['temp']}}</td>
                                 <td >
-                                    <a href="#Aevent" data-toggle="modal" title="Cadastrar"><span class="glyphicon glyphicon-plus-sign" ></span></a>
-                                    <a href="#eevento" data-toggle="modal" title="Editar"><span class="glyphicon glyphicon-edit" ></span></a>
-                                    <a href="#devento" data-toggle="modal" title="Deletar"><span class="glyphicon glyphicon-trash" ></span></a>
+                                    <a href="#aevent" data-toggle="modal" title="Cadastrar"><span class="glyphicon glyphicon-plus-sign" ></span></a>
+                                    <button type="button" data-target="#eventModal" data-toggle="modal"  role="button" style=" background-color: transparent; border-style: none;"  data-id="{{$events['id']}}" data-nome="{{$events['locutor']}}" data-desc="{{$events['description']}}" data-local="{{$events['local']}}" data-temp="{{$events['temp']}}" title="Deletar"><span class="glyphicon glyphicon-edit" ></span></button>
+                                    <button type="button" data-target="#deleteEventModal" data-toggle="modal"  role="button" style=" background-color: transparent; border-style: none;"  data-ide="{{$events['id']}}" title="Deletar"><span class="glyphicon glyphicon-trash" ></span></button>
                                 </td>
                             </tr>
                             @endforeach

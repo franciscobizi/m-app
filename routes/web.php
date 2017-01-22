@@ -44,11 +44,13 @@ Route::post('delete-guest', 'GuestController@removeGuest');
 */
 Route::get('eventos', 'EventsController@listEvents');
 Route::post('eventos', 'EventsController@addEvents')->name('add-events');
+Route::post('delete-event', 'EventsController@removeEvents');
 /*
  * Reports routes
  * 
 */
 Route::get('relatorios', 'ReportsController@listReports')->name('reports');
+
 
 
 

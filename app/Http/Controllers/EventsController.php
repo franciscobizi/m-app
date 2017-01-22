@@ -77,4 +77,15 @@ class EventsController extends BaseController
             );
         }
     }
+    /*
+     * METHOD TO REMOVE EVENTS FROM THE SYSTEM
+     */
+    public function removeEvents(Request $request)
+    {
+        $remove = new CRUD_DB();
+        $remove->removeRow('t_events','id', $request->eid);
+        
+        return redirect('eventos')->with('dsucess', 'Evento removido com sucesso!');
+        
+    }
 }

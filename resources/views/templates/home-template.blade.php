@@ -118,262 +118,23 @@
               </div>
             </div>
           </div>
-          <!--ModalEPerfil-->                      
-          <div class="modal fade" id="perfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Editar perfil</h4>
-                </div>
-                <div class="modal-body">
-                                        
-                               <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="user" class="form-control" placeholder="Nome" value="{{$name}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="mail" class="form-control" placeholder="E-mail" value="{{$person}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="pass" class="form-control" placeholder="Senha" value="{{$pass}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="funcao" class="form-control" placeholder="Função" value="{{$rule}}" required>
-                                </div>
-                                
-                </div>
-                <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Guardar</button>
-                    
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
+          <!--UsersModels-->
+          @include('modals.users.auser')
+          @include('modals.users.suser')
+          <!--EndOfUsersModels-->
           <!--GuestModels-->
           @include('modals.guests.eguest')
           @include('modals.guests.aguest')
           @include('modals.guests.dguest')
           <!--EndOfGuestModels-->
+          <!--EventsModels-->
+          @include('modals.events.devent')
+          @include('modals.events.aevent')
+          @include('modals.events.eevent')
+          <!--EndOfEventsModels-->
 
-          
-          <!--ModalAEvent-->                      
-          <div class="modal fade" id="Aevent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Cadastrar evento</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{{ route('add-events') }}">
-                        {!! csrf_field() !!}
-                               <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">                   
-                               <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="desc" class="form-control" placeholder="Descrição" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="locutor" class="form-control" placeholder="Responsável" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="local" class="form-control" placeholder="Local do evento" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" name="uid" value="{{session('id')}}" class="form-control"  required>
-                                    <input type="datetime-local" name="tempo" title="Hora do evento" class="form-control" placeholder="Horás" required>
-                                </div>
-                                
-                </div>
-                <div class="modal-footer">
-                        <button id="add-Event" class="btn btn-primary">Cadastrar</button>
-                    </form>
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
-          <!--ModalEEvent-->                      
-          <div class="modal fade" id="eevento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Editar evento</h4>
-                </div>
-                <div class="modal-body">
-                                        
-                               <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="desc" class="form-control" placeholder="Descrição" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="resp" class="form-control" placeholder="Responsável" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="local" class="form-control" placeholder="Local do evento" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="time" name="tempo" title="Hora do evento" class="form-control" placeholder="Horás" required>
-                                </div>
-                                
-                </div>
-                <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Guardar</button>
-                    
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
-
-          <!--ModalAUsers-->                      
-          <div class="modal fade" id="Ausers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Cadastrar usuário</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{{ route('signup-user') }}">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">           
-                        <div class="form-group">
-                            <input type="text" name="nome" class="form-control" placeholder="Nome" >
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="mail" class="form-control" placeholder="E-mail" >
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="pass" class="form-control" placeholder="Senha" >
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="funcao" class="form-control" placeholder="Função" >
-                        </div>
-                               
-                </div>
-                <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Cadastrar</button>
-                    </form>
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
-          <!--ModalEUsers-->                      
-          <div class="modal fade" id="eusers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Editar usuário</h4>
-                </div>
-                <div class="modal-body">
-                                        
-                               <div class="form-group">
-                                    <div class="text-danger text-center" style="font-weight: bold" id="e-result">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="nome" class="form-control" placeholder="Nome" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="mail" class="form-control" placeholder="E-mail" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="pass" class="form-control" placeholder="Senha" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="phone" id="phone" class="form-control" placeholder="Telefone" required>
-                                </div>
-                                
-                </div>
-                <div class="modal-footer">
-                        <button id="e-btn" class="btn btn-primary">Guardar</button>
-                    
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
-
-          
-          <!--ModalRelatorios-->                      
-          <div class="modal fade" id="relatorio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel">Relatórios</h4>
-                </div>
-                <div class="modal-body">
-                                        
-                    <div>
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Semanal</a></li>
-                          <li role="presentation"><a href="#mensal" aria-controls="mensal" role="tab" data-toggle="tab">Mensal</a></li>
-                          <li role="presentation"><a href="#anual" aria-controls="anual" role="tab" data-toggle="tab">Anual</a></li>
-                          
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                          <div role="tabpanel" class="tab-pane active" id="home">
-                              <h4 class="text-muted text-center">
-                               Relatório semanal
-                              </h4>
-                              <div id="pieChart" class="chart"></div>
-                                    
-                              
-                          </div>
-                          <div role="tabpanel" class="tab-pane" id="mensal">
-                              <h4 class="text-muted text-center"> 
-                               Relatório mensal
-                              </h4>
-                          </div>
-                          <div role="tabpanel" class="tab-pane" id="anual">
-                              <h4 class="text-muted text-center"> 
-                               Relatório anual
-                              </h4>
-                          </div>
-                          
-                        </div>
-
-                    </div>         
-                                
-                </div>
-                <div class="modal-footer">
-                    
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
+         
+         
           <!--ModalNotifications-->                      
           <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
@@ -452,29 +213,7 @@
           <!--Fim do modal-->
           
           <!--Fim do modal-->
-          <!--ModalDEvento-->                      
-          <div class="modal fade" id="devento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="exampleModalLabel"><i class="glyphicon glyphicon-warning-sign"></i> Deletar evento</h4>
-                </div>
-                <div class="modal-body">
-                                        
-                    <h4 class="text-center text-muted">Tens certeza de que pretendes deletar?</h4>            
-                                
-                </div>
-                <div class="modal-footer">
-                       
-                    <button id="e-btn" class="btn btn-primary">Deletar</button>
-                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fim do modal-->
+          
           <!-- jQuery -->
     
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script-->
@@ -521,6 +260,31 @@ $('#deleteGuestModal').on('show.bs.modal', function (event) {
   var modal = $(this);
   modal.find('#guest-name').text("Tens certeza de que pretendes deletar o(a) Sr(a) " + description + "?");
   modal.find('#gid').val(id);
+  
+});
+
+//Edit and Delete Events
+$('#eventModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget); // Button that triggered the modal
+  var description = button.data('desc'); // Extract info from data-* attributes
+  var rnome = button.data('nome');
+  var local = button.data('local');
+  var hora = button.data('temp');
+  
+  var modal = $(this);
+  modal.find('#desc').val(description);
+  modal.find('#nome').val(rnome);
+  modal.find('#local').val(local);
+  modal.find('#hora').val(hora);
+  
+});
+    
+$('#deleteEventModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var ide = button.data('ide');
+  
+  var modal = $(this);
+  modal.find('#eid').val(ide);
   
 });
 </script>
