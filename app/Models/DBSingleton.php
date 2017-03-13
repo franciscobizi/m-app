@@ -14,6 +14,9 @@ class DBSingleton
         $dsn = 'mysql:host=localhost;dbname=p_mpla';
         $username = 'root';
         $passwd = ''; 
+        /*$dsn = 'mysql:host=mysql.hostinger.pt;dbname=u388355933_mpla';
+        $username = 'u388355933_umpla';
+        $passwd = '$mpla$';*/ 
          
          if(self::$instance == null)
          {

@@ -5,10 +5,10 @@ use mysqli;
 
 abstract class DB
 {
-   const USER = "root";
-   const PASS = "";
-   const HOST = "localhost";
-   const DBASE = "p_mpla";
+   const USER = 'u388355933_umpla';
+   const PASS = '$mpla$';
+   const HOST = 'mysql.hostinger.pt';
+   const DBASE = 'u388355933_mpla';
    private static $instance = null;
    
    private function __construct(){}
